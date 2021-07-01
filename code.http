@@ -1,0 +1,40 @@
+@url = http://localhost:3000/api
+@resourceName = product
+
+# Get
+Get {{url}}/{{resourceName}}
+
+###
+#filter
+GET  {{url}}/{{resourceName}}?price_gte=200
+
+###
+#sort
+GET  {{url}}/{{resourceName}}?_sort=price&_order=asc
+
+###
+# POST(add)
+POST {{url}}/{{resourceName}} HTTP/1.1
+content-type: application/json
+
+
+{
+    "user": "b72bd288-f766-40c9-bc2c-235a660c3c4b",
+    "name": "Tasty Concrete Fish",
+    "price": 104,
+    "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality"
+}
+
+###
+# PATCH(update)
+PATCH {{url}}/{{resourceName}}/IwLYZO_
+Content-Type:  application/json
+
+{
+    "name":"Tam",
+    "price":999
+}
+
+###
+# Delete
+DELETE {{url}}/{{resourceName}}/7
