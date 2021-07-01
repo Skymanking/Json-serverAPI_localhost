@@ -30,5 +30,5 @@ server.use('/api', router);
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  cconsole.log(`Our app is running on port ${ PORT }`);
+  console.log(`Our app is running on port ${ PORT }`);
 });
