@@ -1,8 +1,11 @@
-- Install 
+- Install:
+
 npm install json-server
 
-- ADD new data random
+- ADD new data random:
+
 npm run adddata
 
-- Run server
+- Run server:
+
 npm run dev
