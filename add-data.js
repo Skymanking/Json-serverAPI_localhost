@@ -6,51 +6,51 @@ const { prependListener } = require('process');
 // Set language = Viet Nam
 faker.locale = 'vi';
 
-const RandomUserdata = (n) => {
+const RandomLopdata = (n) => {
   if (n <= 0) return [];
-  const usersdata = [];
+  const lopsdata = [];
   Array.from(new Array(n)).forEach(() => {
-    const Userdata = {
+    const Lopdata = {
       id: faker.datatype.uuid(),
-      name: faker.name.findName(),
-      phone: faker.phone.phoneNumber(),
-      createAt: Date.now(),
-      updateAt: Date.now(),
+      name: faker.address.cityName(),
+      createAt: faker.date.past(),
+      end: faker.date.recent()
     };
-    usersdata.push(Userdata);
+    lopsdata.push(Lopdata);
   });
-  return usersdata;
+  return lopsdata;
 };
 
-const RandomProductdata = (numberUser, numberProduct) => {
-  if (numberProduct <= 0) return [];
-  const productlist = [];
-  for (const user of numberUser) {
-    Array.from(new Array(numberProduct)).forEach(() => {
-      const product = {
-        user: user.id,
+const RandomUserdata = (numberlop, numberUser) => {
+  if (numberUser <= 0) return [];
+  const userlist = [];
+  for (const lop of numberlop) {
+    Array.from(new Array(numberUser)).forEach(() => {
+      const user = {
+        lop: lop.id,
         id: faker.datatype.uuid(),
-        name: faker.commerce.productName(),
-        price: Number.parseFloat(faker.commerce.price()),
-        description: faker.commerce.productDescription(),
+        name: faker.name.findName(),
+        avatar: faker.image.avatar(),
+        qrcode: faker.datatype.number(),
+        phone: faker.phone.phoneNumber(),
         createAt: Date.now(),
         updateAt: Date.now(),
       };
-      productlist.push(product);
+      userlist.push(user);
     });
   }
-  return productlist;
+  return userlist;
 };
 
 (() => {
   //random data
-  const usersdata = RandomUserdata(10);
-  const productdata = RandomProductdata(usersdata, 5);
+  const lopsdata = RandomLopdata(10);
+  const userdata = RandomUserdata(lopsdata, 5);
 
   //prepare db
   const db = {
-    user: usersdata,
-    product: productdata,
+    lop: lopsdata,
+    user: userdata,
   };
   fs.writeFile('db.json', JSON.stringify(db), () => {
     console.log('add data thanh cong');
